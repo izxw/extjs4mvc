@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" version="2.0">
+
+	<tlib-version>0.0.1</tlib-version>
+
+	<jsp-version>1.2</jsp-version>
+
+	<short-name>dwz</short-name>
+
+	<uri>http://www.cnksi.com/tags/dwz</uri>
+
+	<description>DWZ TREE封装.</description>
+
+	<tag>
+		<name>LeftTREE</name>
+		<tag-class>com.cnksi.dwz.web.taglib.LeftTreeTAG</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[DWZ左侧Accordion导航]]></description>
+		<attribute>
+			<name>basePath</name>
+			<description><![CDATA[WEB 上下文]]></description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>targets</name>
+			<description><![CDATA[实现ILinked的对象集合]]></description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>CheckTREE</name>
+		<tag-class>com.cnksi.dwz.web.taglib.CheckTreeTAG</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[dwz check tree]]></description>
+		<attribute>
+			<name>pathList</name>
+			<description><![CDATA[对比的集合,判断某个节点是否应该Checked]]></description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>targets</name>
+			<description><![CDATA[实现ILinked的对象集合]]></description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>oncheck</name>
+			<description><![CDATA[check tree节点被选中时触发的function]]></description>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>inputName</name>
+			<description><![CDATA[Check树中，input的naem值 ]]></description>
+			<required>false</required>
+		</attribute>
+
+	</tag>
+
+
+	<tag>
+		<name>LookupTREE</name>
+		<tag-class>com.cnksi.dwz.web.taglib.LookupTreeTAG</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[dwz check tree]]></description>
+		<attribute>
+			<name>targets</name>
+			<description><![CDATA[实现ILinked的对象集合]]></description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>fields</name>
+			<description><![CDATA[Lookup要带回值的属性]]></description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+
+</taglib>
