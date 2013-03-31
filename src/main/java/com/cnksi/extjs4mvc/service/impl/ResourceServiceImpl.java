@@ -23,10 +23,23 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, Long> impleme
 		this.resourceRepository = (ResourceRepository) resourceRepository;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.cnksi.extjs4mvc.service.ResourceService#selectMenuByUser(java.lang.Long)
+	 */
 	@Override
 	public List<Resource> selectMenuByUser(Long id)
 	{
 		return resourceRepository.selectMenuByUser(id);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.cnksi.extjs4mvc.service.ResourceService#selectOperationByUser(java.lang.Long)
+	 */
+	@Override
+	public List<Resource> selectOperationByUser(Long id)
+	{
+		return resourceRepository.selectOperationByUser(id);
+	}
 }

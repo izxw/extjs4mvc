@@ -2,6 +2,7 @@ package com.cnksi.core.service.impl;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import com.cnksi.core.repository.BaseRepository;
 import com.cnksi.core.repository.SearchFilter;
 import com.cnksi.core.repository.springdata.DynamicSpecifications;
 import com.cnksi.core.service.BaseService;
+import com.cnksi.core.web.extjs.ParamUtils;
 
 public abstract class BaseServiceImpl<T, ID extends Serializable> implements BaseService<T, ID>
 {
@@ -52,25 +54,25 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> implements Bas
 	}
 
 	@Override
-	public T findOne(ID id)  throws BaseException
+	public T findOne(ID id) throws BaseException
 	{
 		return baseDao.findOne(id);
 	}
 
 	@Override
-	public boolean exists(ID id)  throws BaseException
+	public boolean exists(ID id) throws BaseException
 	{
 		return baseDao.exists(id);
 	}
 
 	@Override
-	public Iterable<T> findAll()  throws BaseException
+	public Iterable<T> findAll() throws BaseException
 	{
 		return baseDao.findAll();
 	}
 
 	@Override
-	public Iterable<T> findAll(Iterable<ID> ids)  throws BaseException
+	public Iterable<T> findAll(Iterable<ID> ids) throws BaseException
 	{
 		return baseDao.findAll(ids);
 	}
@@ -83,49 +85,49 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> implements Bas
 
 	@Transactional(readOnly = false)
 	@Override
-	public void delete(ID id)  throws BaseException
+	public void delete(ID id) throws BaseException
 	{
 		baseDao.delete(id);
 	}
 
 	@Transactional(readOnly = false)
 	@Override
-	public void delete(T entity)  throws BaseException
+	public void delete(T entity) throws BaseException
 	{
 		baseDao.delete(entity);
 	}
 
 	@Transactional(readOnly = false)
 	@Override
-	public void delete(Iterable<? extends T> entities)  throws BaseException
+	public void delete(Iterable<? extends T> entities) throws BaseException
 	{
 		baseDao.delete(entities);
 	}
 
-	@Transactional(readOnly = false) 
+	@Transactional(readOnly = false)
 	@Override
-	public void deleteAll()  throws BaseException
+	public void deleteAll() throws BaseException
 	{
 		baseDao.deleteAll();
 	}
 
 	/******************************************** PagingAndSortingRepository ***************************************************/
 	@Override
-	public Iterable<T> findAll(Sort sort)  throws BaseException
+	public Iterable<T> findAll(Sort sort) throws BaseException
 	{
 		return baseDao.findAll(sort);
 
 	}
 
 	@Override
-	public Page<T> findAll(Pageable pageable)  throws BaseException
+	public Page<T> findAll(Pageable pageable) throws BaseException
 	{
 		return baseDao.findAll(pageable);
 
 	}
 
 	@Override
-	public Page<T> findAll(Pageable pageable, Map<String, Object> searchParams)  throws BaseException
+	public Page<T> findAll(Pageable pageable, Map<String, Object> searchParams) throws BaseException
 	{
 
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
@@ -133,6 +135,23 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> implements Bas
 		Specification<T> spec = DynamicSpecifications.bySearchFilter(filters.values(), entityClass);
 
 		return baseDao.findAll(spec, pageable);
+
+	}
+
+	@Override
+	public Page<T> findAll(Pageable pageable, List<ParamUtils> params) throws BaseException
+	{
+		if (params != null)
+		{
+			Map<String, SearchFilter> filters = SearchFilter.parse(params);
+
+			Specification<T> spec = DynamicSpecifications.bySearchFilter(filters.values(), entityClass);
+
+			return baseDao.findAll(spec, pageable);
+		} else
+		{
+			return baseDao.findAll(pageable);
+		}
 
 	}
 
@@ -145,21 +164,21 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> implements Bas
 
 	@Transactional(readOnly = false)
 	@Override
-	public T saveAndFlush(T entity)  throws BaseException
+	public T saveAndFlush(T entity) throws BaseException
 	{
 		return baseDao.saveAndFlush(entity);
 	}
 
 	@Transactional(readOnly = false)
 	@Override
-	public void deleteInBatch(Iterable<T> entities)  throws BaseException
+	public void deleteInBatch(Iterable<T> entities) throws BaseException
 	{
 		baseDao.deleteInBatch(entities);
 	}
 
 	@Transactional(readOnly = false)
 	@Override
-	public void deleteAllInBatch()  throws BaseException
+	public void deleteAllInBatch() throws BaseException
 	{
 		baseDao.deleteAllInBatch();
 	}

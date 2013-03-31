@@ -7,7 +7,18 @@ import com.cnksi.extjs4mvc.domain.Resource;
 
 public interface ResourceService extends BaseService<Resource, Long>
 {
-
-	List<Resource> selectMenuByUser(Long id);
 	
+	/**
+	 * 根据用户ID 获取用户拥有的菜单树
+	 * @param id 用户ID
+	 * @return
+	 */
+	List<Resource> selectMenuByUser(Long id);
+
+	/**
+	 * 根据用户ID 获取用户拥有的操作Operation
+	 * @param id 用户ID
+	 * @return
+	 */
+	List<Resource> selectOperationByUser(Long id);
 }

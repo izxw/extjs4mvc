@@ -5,34 +5,53 @@ Ext.define('KSI.view.user.List', {
 			title : '用户列表',
 			store : 'User',
 			autoShow : true,
-			tbar : [{
+			tbar : ['按条件搜索：', '姓名：', {
+						xtype : 'textfield',
+						name : 'txtName'
+					}, {
+						xtype : 'button',
+						text : '查询',
+						iconCls : 'add',
+						id : 'userlist-query',
+						plugins : [Ext.create('KSI.utils.AccessRule', {
+									featureName : 'userlist-query'
+								})]
+					}, {
+						xtype : 'tbfill'
+					}, {
 						xtype : 'button',
 						text : '新增',
 						iconCls : 'add',
 						id : 'userlist-new',
-						plugins:[Ext.create('KSI.utils.AccessRule', {featureName: 'userlist-create'})]
+						plugins : [Ext.create('KSI.utils.AccessRule', {
+									featureName : 'userlist-create'
+								})]
 					}, {
 						xtype : 'button',
 						text : '编辑',
-						iconCls:'Applicationedit',
+						iconCls : 'Applicationedit',
 						id : 'userlist-edit',
-						plugins:[Ext.create('KSI.utils.AccessRule', {featureName: 'userlist-edit'})]
+						plugins : [Ext.create('KSI.utils.AccessRule', {
+									featureName : 'userlist-edit'
+								})]
 					}, {
 						xtype : 'button',
 						text : '删除',
 						iconCls : 'Delete',
 						id : 'userlist-delete',
-						plugins:[Ext.create('KSI.utils.AccessRule', {featureName: 'userlist-delete'})]
+						plugins : [Ext.create('KSI.utils.AccessRule', {
+									featureName : 'userlist-delete'
+								})]
 					}],
 			columns : [{
 						header : '姓名',
-						dataIndex : 'name',
+						dataIndex : 'username',
 						flex : 1,
 						sortable : true,
 						editor : 'textfield'
 					}, {
 						header : '密码',
-						dataIndex : 'pwd',
+						dataIndex : 'password',
 						flex : 1,
 						renderer : function(value) {
 							return Ext.String.format(
@@ -51,7 +70,8 @@ Ext.define('KSI.view.user.List', {
 							xtype : 'pagingtoolbar',
 							store : 'User',
 							dock : 'bottom',
-							displayInfo : true
+							displayInfo : true,
+							displayMsg : '显示用户 {0} - {1} 共 {2}'
 						}];
 				this.callParent(arguments);
 			}

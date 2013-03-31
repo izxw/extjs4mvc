@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="resources/ext-gpl/resources/css/ext-all.css" type="text/css"></link>
 	<link rel="stylesheet" href="resources/ext-gpl/resources/css/icon.css" type="text/css"></link>
 	<script type="text/javascript" src="resources/ext-gpl/resources/ext-all.js"></script>
-	<script type="text/javascript" src="resources/app/utils/comm.js"></script>
+	<script type="text/javascript" src="resources/app/utils/Comm.js"></script>
     <script type="text/javascript" src="resources/app/loader.js"></script>
 	<script type="text/javascript" src="resources/app/app.js"></script>
 	
@@ -43,9 +43,9 @@
   	comm.add("ctx","${ctx}/");
   	
 	
-  	var array=[{featureName:'userlist-create',status:'hidden',value:false},{featureName:'userlist-edit',status:'hidden',value:false},{featureName:'userlist-create',status:'disabled',value:true}];
+  //	var array=[{featureName:'userlist-create',status:'hidden',value:false},{featureName:'userlist-edit',status:'hidden',value:false},{featureName:'userlist-create',status:'disabled',value:true}];
   	 
-  	comm.add("user",array);
+  //	comm.add("user",array);
   	 
   	</script>
   	<div id="logo"><img src="resources/ext-gpl/images/logo.png"/> </div>

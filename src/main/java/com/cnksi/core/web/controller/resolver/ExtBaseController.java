@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cnksi.core.domain.TreeBaseEntity;
 import com.cnksi.core.domain.extjs.JSONTreeNode;
+import com.cnksi.core.tools.mapper.JsonMapper;
 import com.cnksi.core.tools.utils.ModelUtil;
 import com.cnksi.core.tools.utils.Tree;
 import com.cnksi.core.web.controller.BaseController;
+import com.cnksi.core.web.extjs.ParamUtils;
 import com.cnksi.extjs4mvc.domain.User;
+import com.fasterxml.jackson.databind.JavaType;
 
 /**
  * 管理T的Controller, 使用Restful风格的Urls:
@@ -35,11 +38,9 @@ public abstract class ExtBaseController<T, ID extends Serializable> extends Base
 	public ExtBaseController()
 	{
 		super();
-
-		viewFolder = String.format("/extjs/%s", classSimpleName);
 	}
 
-	protected Tree getJsonTree(List<T> datas)
+	protected JSONTreeNode getJsonTree(List<T> datas)
 	{
 		return getJsonTree(datas, entityClass);
 	}
@@ -50,8 +51,8 @@ public abstract class ExtBaseController<T, ID extends Serializable> extends Base
 	 * @param classz
 	 * @return
 	 */
-	@SuppressWarnings({ "rawtypes"})
-	protected Tree getJsonTree(List<?> datas, Class classz)
+	@SuppressWarnings({ "rawtypes" })
+	protected JSONTreeNode getJsonTree(List<?> datas, Class classz)
 	{
 		JSONTreeNode template = ModelUtil.getJSONTreeNodeTemplate(classz);
 
@@ -70,7 +71,7 @@ public abstract class ExtBaseController<T, ID extends Serializable> extends Base
 		}
 
 		tree.display(tree.getRoot(), "菜单树");
-		return tree;
+		return tree.getRoot();
 	}
 
 	/**
@@ -104,6 +105,18 @@ public abstract class ExtBaseController<T, ID extends Serializable> extends Base
 				e.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * Json字符串序列化ParamUtils集合
+	 * @param jsonFilter=[{"property":"EQ_username","value":"guest"}]
+	 * @return
+	 */
+	public static List<ParamUtils> getParamUtils(String jsonFilter)
+	{
+		JavaType type = JsonMapper.nonEmptyMapper().createCollectionType(List.class, ParamUtils.class);
+		List<ParamUtils> params = JsonMapper.nonEmptyMapper().fromJson(jsonFilter, type);
+		return params;
 	}
 
 	/**

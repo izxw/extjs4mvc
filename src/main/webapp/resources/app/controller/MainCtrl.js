@@ -1,6 +1,8 @@
 Ext.define('KSI.controller.MainCtrl', {
 			extend : 'Ext.app.Controller',
-
+			mixins: {
+				suppleUtil:"KSI.utils.SuppleUtil"
+			},
 			views : ['resource.MenuTree'],
 			models : ['Resource'],
 			stores : ['MenuTreeStore'],
@@ -12,6 +14,10 @@ Ext.define('KSI.controller.MainCtrl', {
 								itemclick : self.itemclick
 							}
 						});
+				var operationDatas=self.ajax({url:comm.get("ctx")+"ext/operation",params:{}});
+				if(operationDatas.success){
+					comm.add("operations",operationDatas.operations);
+				}
 			},
 			
 			itemclick : function(view, record, item, index, e, opts) {

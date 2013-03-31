@@ -25,16 +25,19 @@ Ext.define('KSI.utils.AccessRule', {
 				 * 权限验证
 				 */
 				function checkAccess(){
-					var array = comm.get(self.model);
-					
-					Ext.Array.every(array,function(operation,index,array){
+					//var array = comm.get(self.model);
+					var operations = comm.get("operations");
+					 
+					Ext.Array.every(operations,function(operation,index,operations){
+						operation = Ext.decode(operation);
 						if(operation.featureName == self.featureName){
 							if(operation.status=="hidden"){
-								self.hidden = operation.value;
+								self.hidden = Ext.decode( operation.value);
 							}else if(operation.status=="disabled"){
-								self.disabled = operation.value;
+								self.disabled = Ext.decode( operation.value);
 							}
 							
+							return false;
 						}
 						return true;
 					});

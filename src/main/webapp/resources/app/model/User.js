@@ -1,5 +1,5 @@
 Ext.define('KSI.model.User', {
     extend: 'Ext.data.Model',
-    fields: [{name:'name',type:'string'},{name:'pwd',type:'string'},{name:'id',type:'int'}]
+    fields: [{name:'username',type:'string'},{name:'password',type:'string'},{name:'id',type:'int'}]
 });
 

@@ -1,6 +1,7 @@
 package com.cnksi.core.service;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 
 import com.cnksi.core.exception.BaseException;
+import com.cnksi.core.web.extjs.ParamUtils;
 
 public interface BaseService<T, ID extends Serializable>
 {
@@ -118,6 +120,8 @@ public interface BaseService<T, ID extends Serializable>
 	Page<T> findAll(Pageable pageable)  throws BaseException;
 	
 	Page<T> findAll(Pageable pageable,Map<String, Object> searchParams)  throws BaseException;
+	
+	Page<T> findAll(Pageable pageable,List<ParamUtils> params)  throws BaseException;
 
 	/******************************************** JpaRepository ***************************************************/
 	/**

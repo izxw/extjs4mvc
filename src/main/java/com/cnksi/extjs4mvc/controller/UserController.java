@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,10 @@ public class UserController extends ExtBaseController<Org, Long>
 	private UserService userService;
 
 	@RequestMapping("/user/list")
-	public void getTree(HttpServletResponse response, ExtPage page) throws IOException
+	public void getTree(HttpServletResponse response, HttpServletRequest request, ExtPage page, String filter) throws IOException
 	{
-		Page<User> entities = userService.findAll(page.getPageable());
+		System.out.println(filter);
+		Page<User> entities = userService.findAll(page.getPageable(), getParamUtils(filter));
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("users", entities.getContent());
 		result.put("success", true);
